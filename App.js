@@ -6,11 +6,13 @@
 
 import React, { Component } from 'react';
 import {
+  Button,
   Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import { FormattedMessage, IntlProvider } from 'react-intl'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -22,18 +24,32 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+    const message = (
+      <FormattedMessage
+        id='demo-button-text'
+        defaultMessage='Demo Button'
+        description='Demo button testing react-intl'
+      />
+    );
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <IntlProvider locale='en'>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            Welcome to React Native!
+          </Text>
+          <Text style={styles.instructions}>
+            To get started, edit App.js
+          </Text>
+          <Text style={styles.instructions}>
+            {instructions}
+          </Text>
+          <Button
+            title={message}
+            onPress={console.log}
+          />
+        </View>
+      </IntlProvider>
     );
   }
 }
